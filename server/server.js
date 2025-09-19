@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import serverless from "serverless-http";
-import router from "../routers/routers.js";   // ✅ default import
+import router from "./routers/routers.js";   // ✅ default import
 
 const app = express();
 
