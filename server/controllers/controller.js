@@ -11,7 +11,7 @@ export const getTodos = async (req, res) => {
         });
     } catch (err) {
         console.error("Error fetching todos:", err.message);
-        return res.status(500).json({
+        return res.status(400).json({
             success: false,
             message: `Failed to fetch data from ${TODO_API}`,
             error: err.message
