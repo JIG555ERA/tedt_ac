@@ -1,19 +1,20 @@
-// import { TODO_API } from '../constants/constant.js'
-import axios from 'axios'
-
+import { TODO_API } from "../constants/constant";
 export const getTodos = async (req, res) => {
     try {
-        const { data } = await axios.get(`https://jsonplaceholder.typicode.com/todos/`);
+        console.log("TODO_API is:", TODO_API); // <--- add this
+        const { data } = await axios.get(TODO_API);
+
         return res.status(200).json({
             success: true,
-            message: `Data fetched successfully from ${`https://jsonplaceholder.typicode.com/todos/`}`,
+            message: `Data fetched successfully from ${TODO_API}`,
             data: data
-        })
+        });
     } catch (err) {
+        console.error("Error fetching todos:", err.message);
         return res.status(500).json({
             success: false,
-            message: `Failed to fetch data from ${`https://jsonplaceholder.typicode.com/todos/`}`,
+            message: `Failed to fetch data from ${TODO_API}`,
             error: err.message
-        })
+        });
     }
-}
+};
