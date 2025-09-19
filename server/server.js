@@ -1,9 +1,7 @@
-// server/api/server.js
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import serverless from "serverless-http";
-import router from "./routers/routers.js";   // ✅ default import
+import router from "../routers/routers.js";
 
 const app = express();
 
@@ -12,4 +10,5 @@ app.use(bodyParser.json());
 
 app.use("/test", router);
 
-export const handler = serverless(app);
+// ✅ Vercel needs a default export
+export default app;
