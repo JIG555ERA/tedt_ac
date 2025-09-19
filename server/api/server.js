@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import serverless from 'serverless-http'
-import { router } from '../routers/routers.js'
+import router from '../routers/routers.js'
 
 const app = express();
 
