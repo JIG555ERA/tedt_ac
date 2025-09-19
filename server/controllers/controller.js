@@ -1,4 +1,4 @@
-import { TODO_API } from "../constants/constant";
+import { TODO_API } from "../constants/constant.js";
 export const getTodos = async (req, res) => {
     try {
         console.log("TODO_API is:", TODO_API); // <--- add this
