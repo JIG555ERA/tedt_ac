@@ -1,9 +1,11 @@
 // server/routers/routers.js
 import express from "express";
-import { getTodos } from "../controllers/controller.js";
+import { createTodo, getAllTodos, getTodoByName } from "../controllers/controller.js";
 
 const router = express.Router();
 
-router.get("/getTodos", getTodos);
+router.post("/createTodo", createTodo);
+router.get("/getTodoByName/:username", getTodoByName);
+router.get("/getAllTodos", getAllTodos);
 
 export default router;

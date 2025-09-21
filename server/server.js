@@ -1,14 +1,25 @@
 import express from "express";
+import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
 import router from "./routers/routers.js";
+import { MONGO_URI } from './constants/constant.js'
 
 const app = express();
-
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use("/test", router);
+mongoose.connect(MONGO_URI).then(() => {
+    console.log(`DB connected`)
+})
+.catch(() => {
+    console.log(`Failed to connect to DB ${MONGO_URI}`)
+})
 
-// ✅ Vercel needs a default export
+app.use("/todo", router);
+
 export default app;
+// local hosting for test
+// app.listen(5000, () => {
+//     console.log(`server started at http://localhost:5000/`);
+// });
