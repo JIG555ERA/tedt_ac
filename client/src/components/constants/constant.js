@@ -1,1 +1,1 @@
-export const ENDPOINT_URL = ''
+export const ENDPOINT_URL = process.env.ENDPOINT_URL || 'https://testserver-bay.vercel.app/test/getTodos'
