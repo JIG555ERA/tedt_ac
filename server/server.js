@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
 import router from "./routers/routers.js";
+import storeageRouter from "./routers/storeageRouter.js";
 import { MONGO_URI } from './constants/constant.js'
 
 const app = express();
@@ -17,9 +18,10 @@ mongoose.connect(MONGO_URI).then(() => {
 })
 
 app.use("/todo", router);
+app.use("/storage", storeageRouter)
 
-export default app;
+// export default app;
 // local hosting for test
-// app.listen(5000, () => {
-//     console.log(`server started at http://localhost:5000/`);
-// });
+app.listen(5000, () => {
+    console.log(`server started at http://localhost:5000/`);
+});
