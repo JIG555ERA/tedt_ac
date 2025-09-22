@@ -1,4 +1,5 @@
 import Todo from '../models/todoSchema.js'
+import redis from '../cacheManager/redisClient.js'
 
 export const createTodo = async ( req, res ) => {
   try {
@@ -20,12 +21,30 @@ export const createTodo = async ( req, res ) => {
 
 export const getAllTodos = async ( req, res ) => {
   try {
-    let allTodos = await Todo.find()
+
+    // fetching from redis if cached
+    const cacheKey = "allTodos"
+    const cached = await redis.get(cacheKey);
+    if (cached) {
+      return res.status(200).json({
+        success: true,
+        message: `Data fetched successfully from redis cache manager`,
+        data: JSON.parse(cached)
+      })
+    }
+
+    // fetching from db
+    let allTodos = await Todo.find().lean();
+
+    // caching data into redis
+    await redis.set(cacheKey, JSON.stringify(allTodos), "EX", 3600);
+
     return res.status(200).json({
       success: true,
       message: `All todos fetched successfully`,
       data: allTodos
     })
+
   } catch (err) {
     return res.status(500).json({
       success: false,
