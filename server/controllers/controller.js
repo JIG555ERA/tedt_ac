@@ -26,7 +26,7 @@ export const getAllTodos = async ( req, res ) => {
     const cacheKey = "allTodos"
     const cached = await redis.get(cacheKey);
     if (cached) {
-      res.setHeader("Cache-Control", "public, max-age=60, s-maxage=300, stale-while-revalidate=600");
+      res.setHeader("Cache-Control", "public, max-age=600, s-maxage=200, stale-while-revalidate=3600");
       return res.status(200).json({
         success: true,
         message: `Data fetched successfully from redis cache manager`,
@@ -36,7 +36,7 @@ export const getAllTodos = async ( req, res ) => {
 
     // fetching from db
     let allTodos = await Todo.find().lean();
-    res.setHeader("Cache-Control", "public, max-age=60, s-maxage=300, stale-while-revalidate=600");
+    res.setHeader("Cache-Control", "public, max-age=600, s-maxage=200, stale-while-revalidate=3600");
 
     // caching data into redis
     await redis.set(cacheKey, JSON.stringify(allTodos), "EX", 3600);
