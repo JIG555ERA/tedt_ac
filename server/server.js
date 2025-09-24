@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(compression())
 
-mongoose.connect(MONGO_URI).then(() => {
+mongoose.connect(MONGO_URI, { serverSelectionTimeoutMS: 30000 }).then(() => {
     console.log(`DB connected`)
 })
 .catch(() => {
