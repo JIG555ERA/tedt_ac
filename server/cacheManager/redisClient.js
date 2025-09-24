@@ -1,9 +1,8 @@
-// redisClient.js
 import Redis from "ioredis";
 
-// Connect to Upstash Redis (use your actual URL here or ENV variable)
+// Connect to Upstash Redis 
 const redis = new Redis(process.env.REDIS_URL, {
-  tls: {}, // Required for Upstash (uses TLS)
+  tls: {}, 
 });
 
 redis.on("connect", () => console.log("✅ Connected to Redis (Upstash)"));
