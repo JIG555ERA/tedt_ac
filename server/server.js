@@ -5,10 +5,12 @@ import bodyParser from "body-parser";
 import router from "./routers/routers.js";
 import storeageRouter from "./routers/storeageRouter.js";
 import { MONGO_URI } from './constants/constant.js'
+import compression from "compression";
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(compression())
 
 mongoose.connect(MONGO_URI).then(() => {
     console.log(`DB connected`)
