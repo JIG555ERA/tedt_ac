@@ -8,7 +8,7 @@ import { MONGO_URI } from './constants/constant.js'
 import compression from "compression";
 
 const app = express();
-app.use(cors());
+app.use(cors({origin: "https://myindiaventures.com"}));
 app.use(bodyParser.json());
 app.use(compression())
 
