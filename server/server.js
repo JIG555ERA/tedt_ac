@@ -8,7 +8,7 @@ import { MONGO_URI } from './constants/constant.js'
 import compression from "compression";
 
 const app = express();
-app.use(cors({origin: "https://myindiaventures.com"}));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(compression())
 
@@ -19,7 +19,7 @@ mongoose.connect(MONGO_URI, { serverSelectionTimeoutMS: 30000 }).then(() => {
     console.log(`Failed to connect to DB ${MONGO_URI}`)
 })
 
-app.use("/todo", router);
+app.use("/event", router);
 app.use("/storage", storeageRouter)
 
 export default app;
