@@ -8,12 +8,30 @@ export const createEvent = async ( req, res ) => {
     return res.status(200).json({
       success: true,
       message: `Event created successfully`,
-      data: todo
+      data: event
     })
   } catch (err) {
     return res.status(500).json({
       success: false,
       message: `Failed to create Event`,
+      error: err.message
+    })
+  }
+}
+
+export const createEvents = async ( req, res ) => {
+  try {
+    let events = await Event.insertMany(req.body)
+    // await todo.save();
+    return res.status(200).json({
+      success: true,
+      message: `Events created successfully`,
+      data: events
+    })
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      message: `Failed to create Events`,
       error: err.message
     })
   }
