@@ -39,7 +39,7 @@ export const getAllEvents = async ( req, res ) => {
     // res.setHeader("Cache-Control", "public, max-age=60, s-maxage=300, stale-while-revalidate=600");
 
     // caching data into redis
-    await redis.set(cacheKey, JSON.stringify(allTodos), "EX", 3600);
+    await redis.set(cacheKey, JSON.stringify(allEvents), "EX", 3600);
 
     return res.status(200).json({
       success: true,
